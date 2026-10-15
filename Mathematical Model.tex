@@ -1,0 +1,104 @@
+% !TeX program = xelatex
+% !TeX encoding = UTF-8
+%XeLaTeX
+\documentclass[UTF8,12pt,a4paper,fontset=fandol]{ctexart}
+
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{setspace}
+\setstretch{1.2}
+\pagestyle{plain}
+\usepackage[version=4]{mhchem}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+
+\title{Mathematical Model of the Bistability in Embryonic Development}
+\author{みはり}
+\date{\today} 
+
+\begin{document}
+
+\maketitle
+
+% \begin{abstract}
+% \end{abstract}
+
+% \tableofcontents
+
+\section{Mathematical Basis}
+Let's set the $x(t) = \text{concentration of transcription factor x at time t}$.
+\newline
+So basically we can know that \newline
+\boxed{\frac{dx}{dt}= \text{rate of synthesis} - \text{rate of loss}}.
+\newline
+We can assume that every protein or transcription factor have same possibility of being degraded, so the rate of loss is
+\newline $kx$
+\newline where $k$ is a constant with unit of $s^{-1}$.
+
+\subsection{When no Feedback from X itself}
+$\frac{dx}{dt} = a(S) -  kx$
+\newline where $a(S)$ is the rate of synthesis at external signal $S$.
+\newline At the stable state, where $0=\frac{dx}{dt} = a(S) - kx_0$.
+\newline $x_0 = \frac{a(S)}{k}$
+\newline
+Solve the differiential equation to obtain 
+\newline $\int_{x(0)}^{x(t)} \frac{1}{a(S)-kx} dx = \int_{0}^{t} 1 dt$
+\newline $\Rightarrow x(t) = x_0 - (x_0 - x(0))e^{kt}$
+\newline which means that the $x(t)$ reaches the stable state \textbf{only} at $x_0$ when t is large enough. This result is independent from the initial transcription factor concentration $x(0)$.
+\newline So far, we obtained a monostability model. But what's different that contributes to a bistability model?
+
+\subsection{Positive Autoregulation Exists}
+The reason is simple, the X can affect the expression of X itself.
+\newline For example, the X activates its expression, increasing the rate of X synthesis.
+\newline Therefore, the rate of synthesis is now
+\newline $\frac{dx}{dt} = f(x,S) - kx$
+\newline and we assume the external signal is constant then the equation is now
+\newline $\frac{dx}{dt} = f(x) - kx$.
+\newline The form of $f(x)$ is unknown so far.
+
+\subsection{How rate of synthesis changes with X concentration}
+We can starts from the most simplified model, considering the binding of DNA and the transcription factor X.
+\newline \ce{D + X <=>[$k_{\text{on}}$][$k_{\text{off}}$] DX}
+\newline $v_{\text{on}}=v_{\text{off}}$
+\newline $k_{\text{on}}[D]x=k_{\text{off}}[DX]$
+\newline Let $K_d = \frac{k_{\text{off}}}{k_{\text{on}}}$.
+\newline $[DX] = \frac{[D]x}{K_d}$
+\newline We will never know the concentration of binding points for X on the DNA. Since we need to convert $[DX]$ into a fractional occupancy $\theta = \frac{[DX]}{[D]+ [DX]}$.
+\newline Consider the previous equations, we finally obtained: $\theta = \frac{x}{K_d+x}$.
+\newline This is the Hill function where Hill coefficient $n=1$, showing a saturating relationship.
+\newline Then we assume the binding of X increase the rate of synthesis by $r_d$.
+\newline $r(x) = r_0 +  r_d \frac{x}{K_d + x}$
+\newline When there are multiple X required for a single activation action. Similarly, we can finally obtain Hill equation with Hill coefficient n.
+\newline $H(x) = \frac{x^n}{K_d^n+x^n}$
+\newline When two X forms a dimer (or trimer, quatramer...) then bind to the DNA. The coefficient n will be 2 (or 3 or more respectively), but the $K$ will depend on both affinity to DNA $K_d$ and the affinity of forming dimer $K_{dimer}$.
+
+\subsection{Cooperativity}
+
+The binding mechanism of X can be very different. For example, the multiple binding site for X on DNA may have different affinity to X, or the binding of X affects the affinity for other binding sites. This \textbf{cooperativity} brings different Hill function.
+\newline Let's assume the binding of the first X increase the binding possibility by factor $\omega$.
+\newline Let a relative weight of single binding of X $q=\frac{x}{K_d}$.
+\newline So the relative weight of double binding is $\omega q^2$.
+\newline Let the weight of unbound DNA to be 1.
+\newline The possibility of double binding (we assume this activates the expression only) is
+\newline $P_{\text{active}}=\frac{\omega q^2}{1+2q+\omega q^2}$.
+\newline Where $\omega$ showed the \textbf{cooperativity}.
+\newline $\omega = 1$ means two binding sites binds independently.
+\newline $\omega > 1$ means positive cooperativity.
+\newline $0<\omega < 1$ means negative cooperativity.
+\newline This expression shows the probability of transcriptional activation under assumptions listed above. But the real gene regulatory system is definitely different. For example, a single binding may partially activate transcription. There are even more complex mechanisms behind this.
+\newline So generally, we can simplify this using a phenomenological Hill equation and allow the Hill coefficient $n$ to be non-interger so that it can be a good approximation.
+\newline $H(x) = \frac{x^n}{K^n+x^n}$
+
+
+
+
+\section{}
+
+\subsection{}
+
+
+\section{}
+
+
+\end{document}

@@ -1,0 +1,29 @@
+# macOS and editor files
+.DS_Store
+*.bak
+*.backup
+*.sav
+*~
+*.txss2
+
+# LaTeX build intermediates (PDF files are intentionally tracked)
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex
+*.synctex.gz
+*.synctex(busy)
+*.xdv
+*.dvi
+*.bcf
+*.blg
+*.run.xml
+*.nav
+*.snm
+*.vrb
+*.bbl
